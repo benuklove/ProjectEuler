@@ -8,8 +8,10 @@
  * Problem 11
  *
  * Finds the greatest product of four adjacent numbers given
- * a 20 X 20 matrix.
+ * a 20 X 20 matrix (horizontally, vertically, or diagonally).
  *
+ * Compile: gcc -o problem11 problem11.c -std=c99
+ * Run: ./problem11 problem11.txt
  */
 
 #include <stdio.h>
@@ -88,7 +90,6 @@ int main (int argc, char* argv[])
     }
     printf("Greatest Vertical: %d\n", v);
     printf("Greatest Horizontal: %d\n", h);
-    printf("%d\n", total);
     
     // Negative slope
     int ns = 1;
@@ -110,18 +111,45 @@ int main (int argc, char* argv[])
             }
         }
     }
-    printf("Greatest Diagonal negslope: %d\n", ns);
+    printf("Greatest Negative Slope Diagonal: %d\n", ns);
     
     // Positive slope
+    int ps = 1;
+    int stepi;
+    int tempps;
+    for (stepi = 0; stepi < 17; stepi++)
+    {
+        int stepj;
+        for (stepj = 0; stepj < 17; stepj++)
+        {
+            tempps = 1;
+            int i, j;
+            for (i = 3+stepi, j = 0+stepj; i >= 0+stepi, j < 4+stepj; i--, j++)
+            {
+                tempps *= mda[i][j];
+            }
+            if (tempps > ps)
+            {
+                ps = tempps;
+            }
+        }
+    }
+    printf("Greatest Positive Slope Diagonal: %d\n", ps);
+
+    // determine greatest of the four directions
+    int prods[] = { v, h, ns, ps };
+    int arri;
+    int greatest = 1;
+    for (arri = 0; arri < 4; arri++)
+    {
+        if (prods[arri] > greatest)
+        {
+            greatest = prods[arri];
+        }
+    }
     
-    
-    /*
-    printf("%d\n", mda[0][0]);
-    printf("%d\n", mda[2][6]);
-    printf("%d\n", mda[19][19]);
-    printf("\n");
-    */
-    
+    printf("Greatest product overall: %d\n", greatest);
+
     fclose(fp);
     return 0;
 }
