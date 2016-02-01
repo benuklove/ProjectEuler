@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-Spyder Editor
+Created on Wed Jan 29 16:07:29 2016
 
-This is a temporary script file.
+@author: Ben
 """
 
-from math import sqrt
+#from math import sqrt
+import math
 
 print "Enter the limit: "
 num = int(raw_input())
@@ -17,7 +18,7 @@ def isprime(n):
         return 0
     if n == 2 or n == 3:
         return 1
-    end = int(sqrt(n)) + 1
+    end = int(math.sqrt(n)) + 1
     for x in range(3, end, 2):
         #print x
         if n % x == 0:
@@ -27,20 +28,7 @@ def isprime(n):
         return 1
     else:
         return 0
-"""
-def isprime(n):
-    flag = 0
-    if n % 2 == 0:
-        flag += 1
-    for x in range(3, n, 2):
-        if n % x == 0:
-            flag += 1
-            break
-    if flag == 0:
-        return 1
-    else:
-        return 0
-"""
+
 # given a string, bring the last character to the front (rotate once)
 # and return the number (as an int)
 def rotate(n):
@@ -68,7 +56,6 @@ def allrotsprime(n):
         return 1
     else:
         return 0
-#allrotsprime(986497)
 
 #given an upper limit, find total number of circular primes below limit
 def circularprimes(n):
@@ -76,7 +63,6 @@ def circularprimes(n):
     for x in range(3, n, 2):
         if isprime(x) == 1:
             if allrotsprime(x) == 1:
-                print x
                 count += 1
     return count + 1
 
